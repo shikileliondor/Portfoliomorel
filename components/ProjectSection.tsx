@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { CodeBackground } from "@/components/CodeBackground";
 import { ProjectCard } from "@/components/ProjectCard";
 import { ProjectModal } from "@/components/ProjectModal";
 
@@ -71,8 +70,6 @@ export function ProjectSection() {
 
   return (
     <section id="projects" className="relative z-20 border-t border-white/10 bg-black text-white">
-      <CodeBackground />
-
       <div className="relative z-10">
         <div className="px-6 pt-20 md:px-10 md:pt-24">
           <p className="text-xs uppercase tracking-[0.38em] text-white/55">Portfolio</p>
