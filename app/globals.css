@@ -1,30 +1,63 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
-
-:root {
-  --background: #f8fafc;
-  --foreground: #0f172a;
-}
-
-.dark {
-  --background: #020617;
-  --foreground: #f1f5f9;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: #000;
+  color: #fff;
   font-family: Arial, Helvetica, sans-serif;
+  cursor: none;
+}
+
+@media (max-width: 767px) {
+  body {
+    cursor: auto;
+  }
+}
+
+.hero-letter {
+  opacity: 0;
+  transform: translateX(220px) scale(1.06);
+  filter: blur(8px);
+  animation: hero-enter 900ms cubic-bezier(0.19, 1, 0.22, 1) forwards;
+}
+
+.hero-pattern-line {
+  animation: line-pulse 5.5s ease-in-out infinite;
+}
+
+.hero-scroll-indicator {
+  animation: float-indicator 2.4s ease-in-out infinite;
+}
+
+@keyframes hero-enter {
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes line-pulse {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+@keyframes float-indicator {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(8px);
+    opacity: 0.9;
+  }
 }
