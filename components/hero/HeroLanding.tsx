@@ -11,20 +11,24 @@ export function HeroLanding() {
   const [cursorActive, setCursorActive] = useState(false);
   const [parallax, setParallax] = useState({ x: 0, y: 0 });
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [darkMode, setDarkMode] = useState(() => {
-    if (typeof window === "undefined") {
-      return true;
-    }
-
-    const savedTheme = localStorage.getItem("theme");
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    return savedTheme ? savedTheme === "dark" : prefersDark;
-  });
+  const [darkMode, setDarkMode] = useState(true);
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", darkMode);
     localStorage.setItem("theme", darkMode ? "dark" : "light");
   }, [darkMode]);
+
+  useEffect(() => {
+    const timeoutId = window.setTimeout(() => {
+      const savedTheme = localStorage.getItem("theme");
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      setDarkMode(savedTheme ? savedTheme === "dark" : prefersDark);
+    }, 0);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+    };
+  }, []);
 
   useEffect(() => {
     const onScroll = () => {
