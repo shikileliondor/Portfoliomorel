@@ -61,3 +61,69 @@ body {
     opacity: 0.9;
   }
 }
+
+.code-lane {
+  position: absolute;
+  left: -38vw;
+  width: 200vw;
+  display: flex;
+  gap: clamp(1.2rem, 2vw, 2.6rem);
+  transform: rotate(-8deg);
+  white-space: nowrap;
+  opacity: 0.23;
+}
+
+.code-line {
+  flex-shrink: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: clamp(0.52rem, 0.8vw, 0.78rem);
+  letter-spacing: 0.11em;
+  color: rgba(215, 255, 242, 0.34);
+  text-shadow: 0 0 10px rgba(62, 255, 191, 0.18);
+}
+
+.code-lane--diagonal-up {
+  animation: code-drift-up 34s linear infinite;
+}
+
+.code-lane--diagonal-down {
+  animation: code-drift-down 38s linear infinite;
+}
+
+@keyframes code-drift-up {
+  0% {
+    transform: translate3d(-12%, 4vh, 0) rotate(-8deg);
+  }
+  100% {
+    transform: translate3d(4%, -28vh, 0) rotate(-8deg);
+  }
+}
+
+@keyframes code-drift-down {
+  0% {
+    transform: translate3d(6%, -24vh, 0) rotate(-8deg);
+  }
+  100% {
+    transform: translate3d(-14%, 12vh, 0) rotate(-8deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .code-lane {
+    left: -70vw;
+    width: 260vw;
+    opacity: 0.17;
+  }
+
+  .code-line {
+    font-size: 0.52rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .code-lane--diagonal-up,
+  .code-lane--diagonal-down {
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+  }
+}

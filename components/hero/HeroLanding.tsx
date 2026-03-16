@@ -5,6 +5,7 @@ import { AnimatedInitials } from "@/components/hero/AnimatedInitials";
 import { CustomCursor } from "@/components/hero/CustomCursor";
 import { AboutSection } from "@/components/AboutSection";
 import { ProjectSection } from "@/components/ProjectSection";
+import { CodeBackground } from "@/components/CodeBackground";
 
 export function HeroLanding() {
   const [cursorActive, setCursorActive] = useState(false);
@@ -49,6 +50,7 @@ export function HeroLanding() {
 
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-black text-white">
+      <CodeBackground />
       <CustomCursor isActive={cursorActive} />
 
       <header className="pointer-events-none fixed inset-x-0 top-0 z-30 flex items-start justify-between px-6 pb-8 pt-6 md:px-10 md:pt-8">
@@ -57,7 +59,7 @@ export function HeroLanding() {
       </header>
 
       <section
-        className="relative flex min-h-screen items-center justify-center px-4 md:px-8"
+        className="relative z-10 flex min-h-screen items-center justify-center px-4 md:px-8"
         onPointerMove={handlePointerMove}
         onPointerLeave={resetParallax}
         style={{ opacity: heroOpacity, transition: "opacity 220ms linear" }}
@@ -71,8 +73,10 @@ export function HeroLanding() {
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-xs tracking-[0.28em] text-white/50 hero-scroll-indicator">SCROLL</div>
       </section>
 
-      <AboutSection />
-      <ProjectSection />
+      <div className="relative z-10">
+        <AboutSection />
+        <ProjectSection />
+      </div>
     </div>
   );
 }
