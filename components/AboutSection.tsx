@@ -35,9 +35,9 @@ export function AboutSection() {
           <p className="text-xs uppercase tracking-[0.32em] text-white/55">Présentation</p>
           <h2 className="text-3xl font-semibold leading-tight md:text-5xl">À propos de moi</h2>
           <p className="max-w-2xl text-base leading-relaxed text-white/75 md:text-lg">
-            Je suis BEYAM, développeur backend passionné par la création d’applications modernes
-            et performantes. J’aime concevoir des architectures robustes et construire des produits
-            digitaux scalables.
+          Je suis Brou Effobi Yann Aimé Morel, Backend Developer et Junior IT Project Manager.
+          Je conçois des applications modernes, des architectures robustes 
+          et je participe à la gestion de projets digitaux en alliant vision technique et organisation.
           </p>
         </motion.div>
       </div>
