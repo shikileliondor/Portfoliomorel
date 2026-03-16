@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useState, type PointerEvent } from "re
 import { AnimatedInitials } from "@/components/hero/AnimatedInitials";
 import { CustomCursor } from "@/components/hero/CustomCursor";
 import { AboutSection } from "@/components/AboutSection";
+import { ProjectSection } from "@/components/ProjectSection";
 
 export function HeroLanding() {
   const [cursorActive, setCursorActive] = useState(false);
@@ -71,6 +72,7 @@ export function HeroLanding() {
       </section>
 
       <AboutSection />
+      <ProjectSection />
     </div>
   );
 }
