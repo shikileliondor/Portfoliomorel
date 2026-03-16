@@ -69,12 +69,12 @@ export function ProjectSection() {
   const [activeProject, setActiveProject] = useState<ProjectItem | null>(null);
 
   return (
-    <section id="projects" className="relative z-20 border-t border-white/10 bg-black text-white">
+    <section id="projects" className="relative z-20 border-t border-slate-300 bg-white text-slate-950">
       <div className="relative z-10">
         <div className="px-6 pt-20 md:px-10 md:pt-24">
-          <p className="text-xs uppercase tracking-[0.38em] text-white/55">Portfolio</p>
+          <p className="text-xs uppercase tracking-[0.38em] text-slate-600">Portfolio</p>
           <h2 className="mt-4 max-w-3xl text-4xl font-semibold leading-tight md:text-6xl">Projects</h2>
-          <p className="mt-4 max-w-2xl text-sm text-white/70 md:text-base">
+          <p className="mt-4 max-w-2xl text-sm text-slate-700 md:text-base">
             Un scroll storytelling cinématique : chaque projet se révèle en plein écran, avec une transition immersive
             et une lecture claire des choix produit et techniques.
           </p>

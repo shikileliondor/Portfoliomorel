@@ -51,9 +51,8 @@ function TechLogo({ logo, name }: { logo: TechItem["logo"]; name: string }) {
   };
 
   return (
-    <div className="relative mb-6 h-14 w-14 overflow-hidden rounded-2xl border border-white/15 bg-white/5 shadow-[0_8px_20px_rgba(0,0,0,0.35)]">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(70,190,255,0.3),transparent_55%),radial-gradient(circle_at_80%_100%,rgba(147,112,255,0.25),transparent_55%)]" />
-      <div className="relative flex h-full items-center justify-center text-xs font-semibold tracking-[0.14em] text-white/95" aria-label={`${name} logo`}>
+    <div className="relative mb-6 flex h-14 w-14 items-center justify-center overflow-hidden rounded-2xl border border-slate-300 bg-slate-100 shadow-sm">
+      <div className="relative text-xs font-semibold tracking-[0.14em] text-slate-800" aria-label={`${name} logo`}>
         {glyphs[logo]}
       </div>
     </div>
@@ -62,13 +61,11 @@ function TechLogo({ logo, name }: { logo: TechItem["logo"]; name: string }) {
 
 export function SkillsSection() {
   return (
-    <section id="skills" className="relative z-20 border-t border-white/10 bg-black px-6 py-20 text-white md:px-10 md:py-24">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.06),transparent_40%),radial-gradient(circle_at_80%_60%,rgba(66,220,255,0.08),transparent_45%)]" />
-
+    <section id="skills" className="relative z-20 border-t border-slate-300 bg-slate-50 px-6 py-20 text-slate-950 md:px-10 md:py-24">
       <div className="relative z-10 mx-auto w-full max-w-6xl">
-        <p className="text-xs uppercase tracking-[0.32em] text-white/55">Skills / Tech Stack</p>
+        <p className="text-xs uppercase tracking-[0.32em] text-slate-600">Skills / Tech Stack</p>
         <h2 className="mt-4 text-3xl font-semibold leading-tight md:text-5xl">Modern Stack, Production Mindset.</h2>
-        <p className="mt-4 max-w-3xl text-sm text-white/70 md:text-base">
+        <p className="mt-4 max-w-3xl text-sm text-slate-700 md:text-base">
           Technologies utilisées au quotidien pour concevoir des expériences web, mobile et backend performantes.
         </p>
 
@@ -83,13 +80,11 @@ export function SkillsSection() {
               variants={cardVariants}
               whileHover={{ scale: 1.03, y: -4 }}
               transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-              className="group relative overflow-hidden rounded-2xl border border-white/12 bg-white/[0.03] p-5 shadow-[0_12px_34px_rgba(0,0,0,0.34)] backdrop-blur-sm"
+              className="group relative overflow-hidden rounded-2xl border border-slate-300 bg-white p-5 shadow-sm"
             >
-              <div className="pointer-events-none absolute inset-0 opacity-0 transition duration-300 group-hover:opacity-100" style={{ boxShadow: "inset 0 0 28px rgba(96, 235, 255, 0.22), 0 0 24px rgba(96, 235, 255, 0.2)" }} />
-
               <TechLogo logo={tech.logo} name={tech.name} />
-              <h3 className="text-2xl font-semibold tracking-tight text-white">{tech.name}</h3>
-              <span className="mt-4 inline-flex rounded-full border border-cyan-200/25 bg-cyan-200/10 px-3 py-1 text-xs font-medium tracking-[0.08em] text-cyan-100/90">
+              <h3 className="text-2xl font-semibold tracking-tight text-slate-900">{tech.name}</h3>
+              <span className="mt-4 inline-flex rounded-full border border-slate-300 bg-slate-100 px-3 py-1 text-xs font-medium tracking-[0.08em] text-slate-700">
                 {tech.category}
               </span>
             </motion.article>

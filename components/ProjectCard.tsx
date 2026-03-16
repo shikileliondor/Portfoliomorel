@@ -25,13 +25,13 @@ export function ProjectCard({ project, index, onOpen }: ProjectCardProps) {
       <button
         type="button"
         onClick={() => onOpen(project)}
-        className="relative mx-auto grid w-full max-w-6xl gap-10 border border-white/20 bg-white/[0.03] p-6 text-left backdrop-blur-sm transition duration-500 hover:border-white/45 hover:bg-white/[0.05] md:grid-cols-[1fr_1.05fr] md:p-12"
+        className="relative mx-auto grid w-full max-w-6xl gap-10 border border-slate-300 bg-slate-50 p-6 text-left transition duration-500 hover:border-slate-500 hover:bg-white md:grid-cols-[1fr_1.05fr] md:p-12"
       >
         <div className="space-y-6">
-          <p className="text-xs uppercase tracking-[0.4em] text-white/50">Project {String(index + 1).padStart(2, "0")}</p>
-          <h3 className="text-3xl font-semibold leading-tight text-white md:text-5xl">{project.title}</h3>
+          <p className="text-xs uppercase tracking-[0.4em] text-slate-600">Project {String(index + 1).padStart(2, "0")}</p>
+          <h3 className="text-3xl font-semibold leading-tight text-slate-950 md:text-5xl">{project.title}</h3>
 
-          <div className="space-y-2 text-sm text-white/70 md:text-base">
+          <div className="space-y-2 text-sm text-slate-700 md:text-base">
             {lines.map((line, lineIndex) => (
               <motion.p
                 key={`${project.title}-line-${lineIndex}`}
@@ -49,7 +49,7 @@ export function ProjectCard({ project, index, onOpen }: ProjectCardProps) {
             {project.technologies.map((tech) => (
               <span
                 key={`${project.title}-${tech}`}
-                className="border border-white/20 bg-white/[0.04] px-3 py-1 text-xs uppercase tracking-[0.2em] text-white/75"
+                className="border border-slate-300 bg-white px-3 py-1 text-xs uppercase tracking-[0.2em] text-slate-700"
               >
                 {tech}
               </span>
@@ -62,12 +62,11 @@ export function ProjectCard({ project, index, onOpen }: ProjectCardProps) {
           whileInView={{ opacity: 1, x: 0, scale: 1 }}
           viewport={{ amount: 0.45, once: false }}
           transition={{ duration: 0.8, ease: easing, delay: 0.15 }}
-          className="relative flex min-h-[260px] items-end overflow-hidden border border-white/15 bg-gradient-to-br from-white/10 via-white/[0.03] to-transparent p-6 md:min-h-[380px]"
+          className="relative flex min-h-[260px] items-end overflow-hidden border border-slate-300 bg-gradient-to-br from-slate-100 to-white p-6 md:min-h-[380px]"
         >
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.28),transparent_55%)] opacity-70 transition-opacity duration-500 group-hover:opacity-90" />
           <div className="relative">
-            <p className="text-xs uppercase tracking-[0.38em] text-white/45">Mockup</p>
-            <p className="mt-3 max-w-xs text-lg font-medium text-white/90 md:text-2xl">{project.mockupLabel}</p>
+            <p className="text-xs uppercase tracking-[0.38em] text-slate-600">Mockup</p>
+            <p className="mt-3 max-w-xs text-lg font-medium text-slate-900 md:text-2xl">{project.mockupLabel}</p>
           </div>
         </motion.div>
       </button>
