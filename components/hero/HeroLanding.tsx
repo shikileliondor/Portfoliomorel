@@ -5,7 +5,7 @@ import { AnimatedInitials } from "@/components/hero/AnimatedInitials";
 import { CustomCursor } from "@/components/hero/CustomCursor";
 import { AboutSection } from "@/components/AboutSection";
 import { ProjectSection } from "@/components/ProjectSection";
-import { CodeBackground } from "@/components/CodeBackground";
+// import { CodeBackground } from "@/components/CodeBackground";
 
 export function HeroLanding() {
   const [cursorActive, setCursorActive] = useState(false);
@@ -50,7 +50,7 @@ export function HeroLanding() {
 
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-black text-white">
-      <CodeBackground />
+      {/* <CodeBackground /> */}
       <CustomCursor isActive={cursorActive} />
 
       <header className="pointer-events-none fixed inset-x-0 top-0 z-30 flex items-start justify-between px-6 pb-8 pt-6 md:px-10 md:pt-8">
