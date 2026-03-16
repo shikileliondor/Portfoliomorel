@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 type TechItem = {
   name: string;
@@ -36,6 +37,16 @@ const cardVariants = {
 };
 
 function TechLogo({ logo, name }: { logo: TechItem["logo"]; name: string }) {
+  const logoFiles: Partial<Record<TechItem["logo"], string>> = {
+    php: "/images/php.png",
+    laravel: "/images/laravel.png",
+    typescript: "/images/typescript.png",
+    next: "/images/next.jpg",
+    docker: "/images/docker.png",
+    git: "/images/git.png",
+    github: "/images/github.png",
+  };
+
   const glyphs: Record<TechItem["logo"], string> = {
     php: "PHP",
     laravel: "L",
@@ -52,9 +63,19 @@ function TechLogo({ logo, name }: { logo: TechItem["logo"]; name: string }) {
 
   return (
     <div className="relative mb-6 flex h-14 w-14 items-center justify-center overflow-hidden rounded-2xl border border-slate-300 bg-slate-100 shadow-sm">
-      <div className="relative text-xs font-semibold tracking-[0.14em] text-slate-800" aria-label={`${name} logo`}>
-        {glyphs[logo]}
-      </div>
+      {logoFiles[logo] ? (
+        <Image
+          src={logoFiles[logo]}
+          alt={`${name} logo`}
+          width={40}
+          height={40}
+          className="h-10 w-10 object-contain"
+        />
+      ) : (
+        <div className="relative text-xs font-semibold tracking-[0.14em] text-slate-800" aria-label={`${name} logo`}>
+          {glyphs[logo]}
+        </div>
+      )}
     </div>
   );
 }
