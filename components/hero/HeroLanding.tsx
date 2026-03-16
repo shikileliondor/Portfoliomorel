@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useState, type PointerEvent } from "react";
 import { AnimatedInitials } from "@/components/hero/AnimatedInitials";
 import { CustomCursor } from "@/components/hero/CustomCursor";
+import { AboutSection } from "@/components/AboutSection";
 
 export function HeroLanding() {
   const [cursorActive, setCursorActive] = useState(false);
@@ -69,15 +70,7 @@ export function HeroLanding() {
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-xs tracking-[0.28em] text-white/50 hero-scroll-indicator">SCROLL</div>
       </section>
 
-      <section className="relative z-20 border-t border-white/10 px-6 py-24 md:px-10">
-        <div className="mx-auto max-w-4xl space-y-8">
-          <p className="max-w-2xl text-sm uppercase tracking-[0.28em] text-white/55">Portfolio Developer</p>
-          <h2 className="text-3xl font-semibold leading-tight md:text-5xl">Backend Engineer crafting modern and scalable digital experiences.</h2>
-          <p className="max-w-2xl text-base leading-relaxed text-white/70 md:text-lg">
-            This section is ready to transition into your projects, experience and contact blocks with the same cinematic visual rhythm.
-          </p>
-        </div>
-      </section>
+      <AboutSection />
     </div>
   );
 }
