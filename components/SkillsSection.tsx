@@ -1,7 +1,7 @@
 "use client";
 
 import { SkillCategory } from "@/components/SkillCategory";
-import { CodeBackground } from "@/components/CodeBackground";
+// import { CodeBackground } from "@/components/CodeBackground";
 
 const skillCategories = [
   {
@@ -33,7 +33,7 @@ const skillCategories = [
 export function SkillsSection() {
   return (
     <section id="skills" className="relative z-20 border-t border-white/10 bg-black px-6 py-20 text-white md:px-10 md:py-24">
-      <CodeBackground />
+      {/* <CodeBackground /> */}
 
       <div className="relative z-10 mx-auto w-full max-w-6xl">
         <p className="text-xs uppercase tracking-[0.32em] text-white/55">Skills & Expertise</p>
