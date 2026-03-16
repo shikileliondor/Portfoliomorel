@@ -36,8 +36,8 @@ export function CustomCursor({ isActive }: CustomCursorProps) {
         transition: "transform 160ms ease-out, opacity 160ms ease-out",
       }}
     >
-      <div className="h-full w-full rounded-full border border-white/80 shadow-[0_0_20px_rgba(255,255,255,0.4)]" />
-      <div className="absolute left-1/2 top-1/2 h-1 w-1 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/80" />
+      <div className="h-full w-full rounded-full border border-slate-900/80 shadow-[0_0_20px_rgba(15,23,42,0.25)]" />
+      <div className="absolute left-1/2 top-1/2 h-1 w-1 -translate-x-1/2 -translate-y-1/2 rounded-full bg-slate-900/80" />
     </div>
   );
 }

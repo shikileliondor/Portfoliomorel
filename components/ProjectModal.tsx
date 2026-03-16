@@ -19,37 +19,37 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.35 }}
-          className="fixed inset-0 z-50 overflow-y-auto bg-black/90 px-4 py-6 backdrop-blur-md md:px-8 md:py-10"
+          className="fixed inset-0 z-50 overflow-y-auto bg-slate-100/90 px-4 py-6 backdrop-blur-md md:px-8 md:py-10"
         >
           <motion.div
             initial={{ opacity: 0, y: 40, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 30, scale: 0.98 }}
             transition={{ duration: 0.5, ease }}
-            className="mx-auto w-full max-w-6xl border border-white/20 bg-black p-6 md:p-10"
+            className="mx-auto w-full max-w-6xl border border-slate-300 bg-white p-6 text-slate-950 md:p-10"
           >
             <button
               type="button"
               onClick={onClose}
-              className="ml-auto block border border-white/30 px-3 py-1 text-xs uppercase tracking-[0.28em] text-white/80 transition hover:border-white hover:text-white"
+              className="ml-auto block border border-slate-400 px-3 py-1 text-xs uppercase tracking-[0.28em] text-slate-700 transition hover:border-slate-700 hover:text-slate-900"
             >
               Close
             </button>
 
             <div className="mt-8 grid gap-8 md:grid-cols-[1.05fr_0.95fr]">
               <div className="space-y-5">
-                <p className="text-xs uppercase tracking-[0.34em] text-white/50">{project.id}</p>
+                <p className="text-xs uppercase tracking-[0.34em] text-slate-600">{project.id}</p>
                 <h3 className="text-3xl font-semibold md:text-5xl">{project.title}</h3>
-                <p className="text-sm leading-relaxed text-white/75 md:text-base">{project.longDescription}</p>
+                <p className="text-sm leading-relaxed text-slate-700 md:text-base">{project.longDescription}</p>
 
                 <div className="space-y-2">
-                  <h4 className="text-xs uppercase tracking-[0.28em] text-white/50">Architecture</h4>
-                  <p className="text-sm text-white/75 md:text-base">{project.architecture}</p>
+                  <h4 className="text-xs uppercase tracking-[0.28em] text-slate-600">Architecture</h4>
+                  <p className="text-sm text-slate-700 md:text-base">{project.architecture}</p>
                 </div>
 
                 <div className="flex flex-wrap gap-2">
                   {project.technologies.map((tech) => (
-                    <span key={`modal-${project.title}-${tech}`} className="border border-white/20 px-3 py-1 text-xs text-white/80">
+                    <span key={`modal-${project.title}-${tech}`} className="border border-slate-300 px-3 py-1 text-xs text-slate-700">
                       {tech}
                     </span>
                   ))}
@@ -60,7 +60,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                     href={project.liveUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="border border-white bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-black transition hover:bg-transparent hover:text-white"
+                    className="border border-slate-900 bg-slate-900 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-white transition hover:bg-slate-700"
                   >
                     Voir le projet
                   </a>
@@ -68,7 +68,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                     href={project.githubUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="border border-white/40 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-white transition hover:border-white"
+                    className="border border-slate-400 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-slate-800 transition hover:border-slate-800"
                   >
                     Github
                   </a>
@@ -79,9 +79,9 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                 {project.gallery.map((item, index) => (
                   <div
                     key={`${project.title}-gallery-${index}`}
-                    className="flex min-h-[120px] items-end border border-white/15 bg-gradient-to-br from-white/10 via-white/[0.04] to-transparent p-4 md:min-h-[180px]"
+                    className="flex min-h-[120px] items-end border border-slate-300 bg-slate-50 p-4 md:min-h-[180px]"
                   >
-                    <p className="text-sm font-medium text-white/90">{item}</p>
+                    <p className="text-sm font-medium text-slate-900">{item}</p>
                   </div>
                 ))}
               </div>

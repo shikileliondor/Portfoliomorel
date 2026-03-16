@@ -1,6 +1,4 @@
 @import "tailwindcss";
-@custom-variant dark (&:where(.dark, .dark *));
-
 html {
   scroll-behavior: smooth;
 }
@@ -13,10 +11,6 @@ body {
   transition: background-color 200ms ease, color 200ms ease;
 }
 
-html.dark body {
-  background: #000;
-  color: #fff;
-}
 
 @media (max-width: 767px) {
   body {
@@ -85,8 +79,8 @@ html.dark body {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   font-size: clamp(0.52rem, 0.8vw, 0.78rem);
   letter-spacing: 0.11em;
-  color: rgba(215, 255, 242, 0.34);
-  text-shadow: 0 0 10px rgba(62, 255, 191, 0.18);
+  color: rgba(15, 23, 42, 0.35);
+  text-shadow: 0 0 10px rgba(15, 23, 42, 0.08);
 }
 
 .code-lane--diagonal-up {
@@ -150,8 +144,8 @@ html.dark body {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   font-size: clamp(0.52rem, 0.9vw, 0.78rem);
   letter-spacing: 0.12em;
-  color: rgba(212, 237, 255, 0.32);
-  text-shadow: 0 0 10px rgba(66, 186, 255, 0.12);
+  color: rgba(15, 23, 42, 0.3);
+  text-shadow: 0 0 8px rgba(15, 23, 42, 0.07);
 }
 
 .skills-code-lane--up {
