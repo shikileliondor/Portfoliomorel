@@ -1,48 +1,42 @@
 "use client";
 
-import { motion } from "framer-motion";
-
 const codeLines = [
-  "const user = await db.users.findUnique({ where: { id } });",
-  "router.post('/api/login', authController.login);",
-  "SELECT * FROM users WHERE id = 1;",
-  "export async function GET(request: Request) {",
-  "  const token = request.headers.get('authorization');",
-  "  return NextResponse.json({ success: Boolean(token) });",
+  "const portfolio = await getPortfolio({ locale: 'fr' });",
+  "router.get('/api/projects', async (req, res) => res.json(projects));",
+  "SELECT title, stack FROM projects WHERE featured = true;",
+  "export async function POST(request: Request) {",
+  "  const payload = await request.json();",
+  "  return NextResponse.json({ ok: true, payload });",
   "}",
-  "await queue.add('sync-project-metrics', { projectId, status: 'active' });",
-  "const cacheKey = `projects:${project.id}:stats`;",
-  "UPDATE deployments SET status = 'done' WHERE environment = 'prod';",
-  "interface ProjectPayload { id: string; stack: string[]; }",
-  "app.use('/api/v1/projects', rateLimiter(120, '1m'));",
+  "const direction = prefersReducedMotion ? 'none' : 'diagonal';",
+  "interface ContactForm { name: string; email: string; message: string; }",
+  "await analytics.track('portfolio_view', { section: 'hero' });",
+  "const accent = ['#4fffb0', '#6bd9ff', '#e879f9'];",
+  "app.use('/api/v1/contact', rateLimit({ windowMs: 60000, max: 80 }));",
 ];
 
-const marqueeRows = [0, 1, 2];
+const lanes = [
+  { key: "lane-a", className: "code-lane code-lane--diagonal-up", style: { top: "8%" } },
+  { key: "lane-b", className: "code-lane code-lane--diagonal-down", style: { top: "34%" } },
+  { key: "lane-c", className: "code-lane code-lane--diagonal-up", style: { top: "60%" } },
+  { key: "lane-d", className: "code-lane code-lane--diagonal-down", style: { top: "82%" } },
+] as const;
+
+const repeatedLines = [...codeLines, ...codeLines, ...codeLines];
 
 export function CodeBackground() {
   return (
-    <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.08),_transparent_58%)]" />
+    <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden" aria-hidden>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(79,255,176,0.08),_transparent_42%),radial-gradient(circle_at_bottom_right,_rgba(104,164,255,0.07),_transparent_46%)]" />
 
-      {marqueeRows.map((row) => (
-        <motion.div
-          key={row}
-          className="absolute left-0 right-0 flex flex-col gap-4 text-[10px] leading-5 text-white/15 md:text-xs"
-          style={{ top: `${row * 33}%` }}
-          animate={{ y: [0, -180] }}
-          transition={{
-            duration: 24 + row * 6,
-            repeat: Number.POSITIVE_INFINITY,
-            repeatType: "loop",
-            ease: "linear",
-          }}
-        >
-          {[...codeLines, ...codeLines].map((line, index) => (
-            <p key={`${row}-${index}`} className="whitespace-nowrap px-8 font-mono tracking-[0.08em]">
+      {lanes.map((lane) => (
+        <div key={lane.key} className={lane.className} style={lane.style}>
+          {repeatedLines.map((line, index) => (
+            <p key={`${lane.key}-${index}`} className="code-line">
               {line}
             </p>
           ))}
-        </motion.div>
+        </div>
       ))}
     </div>
   );
