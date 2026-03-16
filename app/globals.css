@@ -1,14 +1,21 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  background: #000;
-  color: #fff;
+  background: #f1f5f9;
+  color: #0f172a;
   font-family: Arial, Helvetica, sans-serif;
   cursor: none;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
+html.dark body {
+  background: #000;
+  color: #fff;
 }
 
 @media (max-width: 767px) {
