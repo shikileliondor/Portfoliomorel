@@ -5,6 +5,7 @@ import { AnimatedInitials } from "@/components/hero/AnimatedInitials";
 import { CustomCursor } from "@/components/hero/CustomCursor";
 import { AboutSection } from "@/components/AboutSection";
 import { ProjectSection } from "@/components/ProjectSection";
+import Contact from "@/components/Contact";
 import { SkillsSection } from "@/components/SkillsSection";
 
 export function HeroLanding() {
@@ -83,6 +84,7 @@ export function HeroLanding() {
         <AboutSection />
         <SkillsSection />
         <ProjectSection />
+        <Contact />
       </div>
     </div>
   );

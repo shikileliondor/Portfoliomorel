@@ -1,60 +1,61 @@
+const EXPERTISE_ITEMS = [
+  "Développement Mobile & Cross-platform",
+  "Jeux Vidéo & Expériences Interactives",
+  "Réalité Augmentée & Virtuelle (AR/VR)",
+  "Intégration d'IA & LLM (Gemini)",
+  "Mini-Apps (Telegram / WeChat)",
+];
+
 export default function Contact() {
   return (
     <section id="contact" className="scroll-mt-24 px-6 py-16 lg:px-8 lg:py-20">
-      <div className="mx-auto grid w-full max-w-6xl gap-8 lg:grid-cols-2">
-        <div>
-          <h3 className="mb-4 text-3xl font-semibold text-slate-900 dark:text-slate-100">Contact</h3>
-          <p className="mb-2 text-slate-600 dark:text-slate-400">Email : morelyann10@gmail.com</p>
-          <p className="text-slate-600 dark:text-slate-400">Téléphones : 0143099959 / 0799245071</p>
+      <div className="mx-auto w-full max-w-6xl rounded-[2.8rem] border border-cyan-900/30 bg-slate-950/90 p-8 shadow-[0_0_80px_rgba(0,151,255,0.12)] md:p-12">
+        <div className="grid gap-12 lg:grid-cols-2">
+          <p className="max-w-xl text-3xl leading-relaxed text-slate-300/90 md:text-4xl">
+            Du concept initial au déploiement sur les stores, j&apos;accompagne dans la création de
+            produits digitaux innovants.
+          </p>
+
+          <ul className="space-y-6">
+            {EXPERTISE_ITEMS.map((item) => (
+              <li key={item} className="flex items-center gap-4 text-2xl font-semibold text-slate-100/90">
+                <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-blue-950 text-blue-500">
+                  ✓
+                </span>
+                {item}
+              </li>
+            ))}
+          </ul>
         </div>
 
-        <form className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-900">
-          <div className="mb-4">
-            <label htmlFor="name" className="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-300">
-              Nom
-            </label>
-            <input
-              id="name"
-              name="name"
-              type="text"
-              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-2 text-slate-700 outline-none ring-slate-200 transition focus:ring-2 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-200"
-              placeholder="Votre nom"
-            />
+        <div className="my-10 border-t border-slate-800" />
+
+        <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+          <div className="flex items-center gap-4">
+            <span className="h-4 w-4 rounded-full bg-emerald-400" />
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.3em] text-slate-500">Délai de réponse...</p>
+              <p className="text-4xl font-black uppercase italic text-white">Immediat</p>
+            </div>
           </div>
 
-          <div className="mb-4">
-            <label htmlFor="email" className="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-300">
-              Email
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-2 text-slate-700 outline-none ring-slate-200 transition focus:ring-2 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-200"
-              placeholder="votre@email.com"
-            />
+          <div className="flex flex-col gap-4 sm:flex-row">
+            <a
+              href="https://www.linkedin.com"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex min-w-52 items-center justify-center rounded-full border border-slate-800 px-8 py-4 text-3xl font-semibold text-slate-100 transition hover:border-slate-600"
+            >
+              LinkedIn
+            </a>
+            <a
+              href="mailto:morelyann10@gmail.com"
+              className="inline-flex min-w-60 items-center justify-center rounded-full bg-white px-8 py-4 text-3xl font-semibold text-slate-900 shadow-[0_0_30px_rgba(255,255,255,0.35)] transition hover:bg-slate-100"
+            >
+              Me contacter
+            </a>
           </div>
-
-          <div className="mb-5">
-            <label htmlFor="message" className="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-300">
-              Message
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              rows={4}
-              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-2 text-slate-700 outline-none ring-slate-200 transition focus:ring-2 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-200"
-              placeholder="Votre message"
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="w-full rounded-xl bg-slate-900 px-6 py-3 text-sm font-medium text-white transition-colors duration-300 hover:bg-slate-800 dark:bg-cyan-600 dark:hover:bg-cyan-500"
-          >
-            Envoyer
-          </button>
-        </form>
+        </div>
       </div>
     </section>
   );
