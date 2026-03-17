@@ -20,6 +20,15 @@ type NodeName =
   | "Agents IA"
   | "API REST";
 
+type ClusterName = "backend" | "data" | "infra" | "ia" | "mobile";
+
+type GraphNode = {
+  x: number;
+  y: number;
+  size: "sm" | "md" | "lg";
+  cluster: ClusterName;
+};
+
 const stackItems = [
   { name: "Laravel", type: "Framework", level: 98, opinion: "Mon terrain de jeu principal. Élégant, rapide à shipper, batteries incluses" },
   { name: "NestJS", type: "Framework", level: 91, opinion: "Quand on veut la structure de Laravel mais en TypeScript" },
@@ -45,24 +54,37 @@ const stackItems = [
   { name: "Dart", type: "Langage", level: 82, opinion: "Propre et typé. On l'oublie vite tellement Flutter l'abstrait bien" },
 ] as const;
 
-const nodePositions: Record<
-  NodeName,
-  { x: number; y: number; size: "sm" | "md" | "lg"; cluster: string }
-> = {
-  Laravel: { x: 50, y: 47, size: "lg", cluster: "backend" },
-  NestJS: { x: 29, y: 35, size: "md", cluster: "backend" },
-  PHP: { x: 38, y: 61, size: "md", cluster: "backend" },
-  TypeScript: { x: 22, y: 53, size: "md", cluster: "backend" },
-  JavaScript: { x: 16, y: 68, size: "sm", cluster: "backend" },
-  Flutter: { x: 79, y: 69, size: "md", cluster: "mobile" },
-  Dart: { x: 90, y: 69, size: "sm", cluster: "mobile" },
-  PostgreSQL: { x: 61, y: 33, size: "md", cluster: "data" },
-  MySQL: { x: 56, y: 64, size: "sm", cluster: "data" },
-  Docker: { x: 74, y: 39, size: "md", cluster: "infra" },
-  n8n: { x: 74, y: 19, size: "sm", cluster: "ia" },
-  "Agents IA": { x: 56, y: 15, size: "sm", cluster: "ia" },
-  "API REST": { x: 90, y: 44, size: "sm", cluster: "api" },
+const nodePositions: Record<NodeName, GraphNode> = {
+  Laravel: { x: 44, y: 46, size: "lg", cluster: "backend" },
+  NestJS: { x: 33, y: 34, size: "md", cluster: "backend" },
+  PHP: { x: 35, y: 60, size: "md", cluster: "backend" },
+  TypeScript: { x: 28, y: 48, size: "md", cluster: "backend" },
+  JavaScript: { x: 22, y: 67, size: "sm", cluster: "backend" },
+  Flutter: { x: 64, y: 56, size: "md", cluster: "mobile" },
+  Dart: { x: 73, y: 64, size: "sm", cluster: "mobile" },
+  PostgreSQL: { x: 54, y: 34, size: "md", cluster: "data" },
+  MySQL: { x: 53, y: 63, size: "sm", cluster: "data" },
+  Docker: { x: 68, y: 41, size: "md", cluster: "infra" },
+  n8n: { x: 60, y: 20, size: "sm", cluster: "ia" },
+  "Agents IA": { x: 48, y: 17, size: "sm", cluster: "ia" },
+  "API REST": { x: 72, y: 48, size: "sm", cluster: "mobile" },
 };
+
+const clusterColors: Record<ClusterName, string> = {
+  backend: "#00ff88",
+  data: "#FAC775",
+  infra: "#378ADD",
+  ia: "#D4537E",
+  mobile: "#97C459",
+};
+
+const clusterLabels: Array<{ key: ClusterName; label: string }> = [
+  { key: "backend", label: "Backend" },
+  { key: "data", label: "Data" },
+  { key: "infra", label: "Infra" },
+  { key: "ia", label: "IA / Automatisation" },
+  { key: "mobile", label: "Mobile" },
+];
 
 const nodeLinks: Array<[NodeName, NodeName]> = [
   ["Laravel", "PHP"],
@@ -86,6 +108,27 @@ const nodeLinks: Array<[NodeName, NodeName]> = [
   ["Agents IA", "NestJS"],
   ["Agents IA", "API REST"],
 ];
+
+const nodeInfo: Record<NodeName, { years: string; type: string; opinion: string }> = {
+  Laravel: { years: "6 ans", type: "Backend", opinion: "Mon framework MVP: livré vite, propre et scalable." },
+  NestJS: { years: "4 ans", type: "Backend", opinion: "Architecture clean côté Node, parfait pour les APIs ambitieuses." },
+  PHP: { years: "6 ans", type: "Langage", opinion: "Stable, mature, zéro drama en prod." },
+  TypeScript: { years: "5 ans", type: "Langage", opinion: "Le meilleur garde-fou quand le projet grossit." },
+  JavaScript: { years: "7 ans", type: "Langage", opinion: "Indispensable, mais je préfère le garder typé." },
+  Flutter: { years: "3 ans", type: "Mobile", opinion: "Un codebase, deux plateformes, time-to-market agressif." },
+  Dart: { years: "3 ans", type: "Langage", opinion: "Simple et efficace, parfait pour shipper mobile." },
+  PostgreSQL: { years: "6 ans", type: "Data", opinion: "Mon couteau suisse SQL pour les apps sérieuses." },
+  MySQL: { years: "6 ans", type: "Data", opinion: "Fiable et rapide quand il faut aller droit au but." },
+  Docker: { years: "5 ans", type: "Infra", opinion: "La base pour des environnements reproductibles sans friction." },
+  n8n: { years: "2 ans", type: "Automatisation", opinion: "Je remplace des tâches manuelles par des flux robustes." },
+  "Agents IA": { years: "2 ans", type: "IA", opinion: "Le backend qui raisonne, décide et agit via API." },
+  "API REST": { years: "6 ans", type: "Interface", opinion: "Le contrat clair entre mobile, web et backend." },
+};
+
+const pseudoRandom = (seed: number) => {
+  const x = Math.sin(seed * 999) * 10000;
+  return x - Math.floor(x);
+};
 
 const iaCards = [
   {
@@ -204,6 +247,114 @@ export default function PortfolioPage() {
     return () => timers.forEach((t) => window.clearTimeout(t));
   }, []);
 
+  const stackGraphRef = useRef<HTMLDivElement | null>(null);
+  const [hoveredNode, setHoveredNode] = useState<NodeName | null>(null);
+  const [draggedNode, setDraggedNode] = useState<NodeName | null>(null);
+  const [graphNodes, setGraphNodes] = useState<Record<NodeName, GraphNode>>(nodePositions);
+  const [particles, setParticles] = useState(
+    Array.from({ length: 15 }, (_, i) => ({
+      x: 50 + pseudoRandom(i + 1) * 700,
+      y: 30 + pseudoRandom(i + 31) * 280,
+      vx: (pseudoRandom(i + 91) - 0.5) * 0.35,
+      vy: (pseudoRandom(i + 141) - 0.5) * 0.35,
+      color: i % 2 === 0 ? "#00ff88" : "#97C459",
+    })),
+  );
+
+  const flowMeta = useMemo(
+    () =>
+      nodeLinks.map((_, i) => ({
+        duration: 2 + pseudoRandom(i + 11) * 3,
+        begin: -(pseudoRandom(i + 101) * 5),
+      })),
+    [],
+  );
+
+  const pulseMeta = useMemo(
+    () =>
+      (Object.keys(nodePositions) as NodeName[]).reduce((acc, node, i) => {
+        acc[node] = {
+          duration: 3 + pseudoRandom(i + 201) * 3,
+          delay: -(pseudoRandom(i + 301) * 6),
+        };
+        return acc;
+      }, {} as Record<NodeName, { duration: number; delay: number }>),
+    [],
+  );
+
+  useEffect(() => {
+    let raf = 0;
+    const update = () => {
+      const bounds = stackGraphRef.current?.getBoundingClientRect();
+      if (!bounds) {
+        raf = window.requestAnimationFrame(update);
+        return;
+      }
+      setParticles((prev) =>
+        prev.map((particle) => {
+          let x = particle.x + particle.vx;
+          let y = particle.y + particle.vy;
+          let vx = particle.vx;
+          let vy = particle.vy;
+
+          if (x < 0 || x > bounds.width) {
+            vx *= -1;
+            x = Math.min(Math.max(x, 0), bounds.width);
+          }
+          if (y < 0 || y > bounds.height) {
+            vy *= -1;
+            y = Math.min(Math.max(y, 0), bounds.height);
+          }
+
+          return { ...particle, x, y, vx, vy };
+        }),
+      );
+      raf = window.requestAnimationFrame(update);
+    };
+    raf = window.requestAnimationFrame(update);
+    return () => window.cancelAnimationFrame(raf);
+  }, []);
+
+  useEffect(() => {
+    if (!draggedNode) return;
+
+    const onMove = (event: PointerEvent) => {
+      const bounds = stackGraphRef.current?.getBoundingClientRect();
+      if (!bounds) return;
+
+      const x = ((event.clientX - bounds.left) / bounds.width) * 100;
+      const y = ((event.clientY - bounds.top) / bounds.height) * 100;
+
+      setGraphNodes((prev) => ({
+        ...prev,
+        [draggedNode]: {
+          ...prev[draggedNode],
+          x: Math.min(Math.max(x, 8), 92),
+          y: Math.min(Math.max(y, 10), 90),
+        },
+      }));
+    };
+
+    const onUp = () => setDraggedNode(null);
+
+    window.addEventListener("pointermove", onMove);
+    window.addEventListener("pointerup", onUp);
+    return () => {
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerup", onUp);
+    };
+  }, [draggedNode]);
+
+  const connectedNodes = useMemo(() => {
+    if (!hoveredNode) return new Set<NodeName>();
+    const set = new Set<NodeName>([hoveredNode]);
+    nodeLinks.forEach(([from, to]) => {
+      if (from === hoveredNode) set.add(to);
+      if (to === hoveredNode) set.add(from);
+    });
+    return set;
+  }, [hoveredNode]);
+
   const badges = useMemo(() => ["Laravel", "NestJS", "PostgreSQL", "Docker", "n8n", "Flutter"], []);
 
   return (
@@ -315,46 +466,99 @@ export default function PortfolioPage() {
         </motion.h2>
 
         <div className="mb-10 rounded-2xl border border-white/10 bg-[#0f1020]/70 p-4 md:p-6">
-          <div className="relative h-[420px] w-full overflow-hidden rounded-xl border border-white/10 bg-[#090b14]">
+          <div ref={stackGraphRef} className="relative h-[440px] w-full overflow-hidden rounded-xl border border-white/10 bg-[#090b14]">
             <svg className="absolute inset-0 h-full w-full">
+              {particles.map((particle, i) => (
+                <circle key={`particle-${i}`} cx={particle.x} cy={particle.y} r="1" fill={particle.color} opacity="0.2" />
+              ))}
+
               {nodeLinks.map(([from, to], i) => {
-                const start = nodePositions[from];
-                const end = nodePositions[to];
+                const startNode = graphNodes[from];
+                const endNode = graphNodes[to];
+                const pathId = `stack-link-${i}`;
+                const isLinkedToHover = hoveredNode ? from === hoveredNode || to === hoveredNode : false;
+                const speedFactor = isLinkedToHover ? 3 : 1;
+
                 return (
-                  <line
-                    key={`${from}-${to}-${i}`}
-                    x1={`${start.x}%`}
-                    y1={`${start.y}%`}
-                    x2={`${end.x}%`}
-                    y2={`${end.y}%`}
-                    stroke="rgba(0,255,136,0.28)"
-                    strokeWidth={from === "Laravel" || to === "Laravel" ? 2.2 : 1.4}
-                  />
+                  <g key={`${from}-${to}-${i}`}>
+                    <path
+                      id={pathId}
+                      d={`M ${startNode.x}% ${startNode.y}% L ${endNode.x}% ${endNode.y}%`}
+                      fill="none"
+                      stroke={clusterColors[startNode.cluster]}
+                      strokeWidth={from === "Laravel" || to === "Laravel" ? 2 : 1.5}
+                      strokeOpacity={hoveredNode ? (isLinkedToHover ? 0.6 : 0.08) : 0.15}
+                    />
+                    <circle r={isLinkedToHover ? 5 : 3} fill={clusterColors[startNode.cluster]} opacity="0.8">
+                      <animateMotion
+                        dur={`${(flowMeta[i].duration / speedFactor).toFixed(2)}s`}
+                        begin={`${flowMeta[i].begin}s`}
+                        repeatCount="indefinite"
+                      >
+                        <mpath href={`#${pathId}`} />
+                      </animateMotion>
+                    </circle>
+                  </g>
                 );
               })}
             </svg>
 
-            {(Object.keys(nodePositions) as NodeName[]).map((node) => {
-              const config = nodePositions[node];
-              const sizeClass = config.size === "lg" ? "px-5 py-3 text-base" : config.size === "md" ? "px-4 py-2.5 text-sm" : "px-3 py-2 text-xs";
+            {(Object.keys(graphNodes) as NodeName[]).map((node) => {
+              const config = graphNodes[node];
+              const isConnected = hoveredNode ? connectedNodes.has(node) : true;
+              const isHovered = hoveredNode === node;
               return (
-                <div
+                <button
+                  type="button"
                   key={node}
-                  className={`absolute -translate-x-1/2 -translate-y-1/2 rounded-full border font-mono ${sizeClass} ${
-                    node === "Laravel"
-                      ? "border-[#00ff88]/80 bg-[#00ff88]/15 text-[#baffdc] shadow-[0_0_25px_rgba(0,255,136,0.3)]"
-                      : "border-[#00ff88]/40 bg-[#09111a] text-white/85"
-                  }`}
-                  style={{ left: `${config.x}%`, top: `${config.y}%` }}
+                  onPointerDown={(event) => {
+                    event.preventDefault();
+                    setDraggedNode(node);
+                  }}
+                  onMouseEnter={() => setHoveredNode(node)}
+                  onMouseLeave={() => setHoveredNode(null)}
+                  className="absolute -translate-x-1/2 -translate-y-1/2 rounded-[999px] border bg-[#09111a]/95 px-5 py-2.5 font-mono text-xs text-white transition duration-300"
+                  style={{
+                    left: `${config.x}%`,
+                    top: `${config.y}%`,
+                    borderColor: clusterColors[config.cluster],
+                    opacity: hoveredNode ? (isConnected ? 1 : 0.25) : 1,
+                    transform: `translate(-50%, -50%) scale(${isHovered ? 1.15 : 1})`,
+                    boxShadow: isHovered ? `0 0 22px ${clusterColors[config.cluster]}66` : "none",
+                    animation: isHovered
+                      ? "none"
+                      : `nodePulse ${pulseMeta[node].duration.toFixed(2)}s ease-in-out ${pulseMeta[node].delay.toFixed(2)}s infinite`,
+                  }}
                 >
                   {node}
-                </div>
+                </button>
               );
             })}
+
+            {hoveredNode && (
+              <div
+                className="pointer-events-none absolute z-20 max-w-[260px] rounded-xl border border-white/20 bg-[#0b1020]/95 p-3"
+                style={{
+                  left: `${Math.min(graphNodes[hoveredNode].x + 3, 74)}%`,
+                  top: `${Math.max(graphNodes[hoveredNode].y - 11, 8)}%`,
+                }}
+              >
+                <p className="font-syne text-sm text-white">{hoveredNode}</p>
+                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/55">{nodeInfo[hoveredNode].type}</p>
+                <p className="mt-1 font-mono text-[11px] text-white/75">XP: {nodeInfo[hoveredNode].years}</p>
+                <p className="mt-2 font-mono text-[11px] leading-relaxed text-white/70">{nodeInfo[hoveredNode].opinion}</p>
+              </div>
+            )}
           </div>
-          <p className="mt-3 font-mono text-xs text-white/45">
-            Clusters : backend (Laravel, NestJS, PHP, TypeScript) • data (PostgreSQL, MySQL) • infra (Docker) • automatisation/IA (n8n, Agents IA) • mobile (Flutter, Dart)
-          </p>
+
+          <div className="mt-3 flex flex-wrap items-center gap-4">
+            {clusterLabels.map((cluster) => (
+              <div key={cluster.key} className="flex items-center gap-1.5 font-mono text-[10px] text-white/70">
+                <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: clusterColors[cluster.key] }} />
+                {cluster.label}
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -469,6 +673,18 @@ export default function PortfolioPage() {
           ))}
         </div>
       </section>
+
+      <style jsx global>{`
+        @keyframes nodePulse {
+          0%,
+          100% {
+            transform: translate(-50%, -50%) scale(1);
+          }
+          50% {
+            transform: translate(-50%, -50%) scale(1.025);
+          }
+        }
+      `}</style>
     </main>
   );
 }
