@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "BEYAM — Portfolio",
-  description: "Minimal cinematic portfolio landing page for BEYAM.",
+  title: "alex.dev — Backend Portfolio",
+  description: "Portfolio one-page backend developer en Next.js.",
 };
 
 export default function RootLayout({
