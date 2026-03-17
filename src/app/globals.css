@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #080810;
+  cursor: none;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYwIiBoZWlnaHQ9IjE2MCIgdmlld0JveD0iMCAwIDE2MCAxNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGZpbHRlciBpZD0ibiI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuNzUiIG51bU9jdGF2ZXM9IjIiIHN0aXRjaFRpbGVzPSJzdGl0Y2giLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0iMTYwIiBoZWlnaHQ9IjE2MCIgZmlsdGVyPSJ1cmwoI24pIiBvcGFjaXR5PSIwLjQiLz48L3N2Zz4=");
+}
+
+.grid-bg {
+  background-image: linear-gradient(to right, rgb(0 255 136 / 4%) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(0 255 136 / 4%) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.mesh-bg {
+  background: radial-gradient(circle at 20% 20%, rgb(0 255 136 / 6%), transparent 35%),
+    radial-gradient(circle at 80% 40%, rgb(59 130 246 / 5%), transparent 35%), #080810;
+}
+
+.glow-accent {
+  box-shadow: 0 0 40px rgb(0 255 136 / 15%), 0 0 80px rgb(0 255 136 / 5%);
+}
+
+.text-glow {
+  text-shadow: 0 0 30px rgb(0 255 136 / 50%);
+}
+
+::selection {
+  background: rgb(0 255 136 / 20%);
+  color: #00ff88;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(0 255 136 / 30%);
+}
+
+@media (max-width: 768px) {
+  body {
+    cursor: auto;
+  }
+}
