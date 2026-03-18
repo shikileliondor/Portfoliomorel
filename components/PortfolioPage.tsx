@@ -29,6 +29,8 @@ type GraphNode = {
   cluster: ClusterName;
 };
 
+type NodeVelocity = Record<NodeName, { vx: number; vy: number }>;
+
 const stackItems = [
   { name: "Laravel", type: "Framework", level: 98, opinion: "Mon terrain de jeu principal. Élégant, rapide à shipper, batteries incluses" },
   { name: "NestJS", type: "Framework", level: 91, opinion: "Quand on veut la structure de Laravel mais en TypeScript" },
@@ -251,6 +253,15 @@ export default function PortfolioPage() {
   const [hoveredNode, setHoveredNode] = useState<NodeName | null>(null);
   const [draggedNode, setDraggedNode] = useState<NodeName | null>(null);
   const [graphNodes, setGraphNodes] = useState<Record<NodeName, GraphNode>>(nodePositions);
+  const nodeVelocitiesRef = useRef<NodeVelocity>(
+    (Object.keys(nodePositions) as NodeName[]).reduce((acc, node, index) => {
+      acc[node] = {
+        vx: (pseudoRandom(index + 401) - 0.5) * 0.018,
+        vy: (pseudoRandom(index + 461) - 0.5) * 0.018,
+      };
+      return acc;
+    }, {} as NodeVelocity),
+  );
   const [particles, setParticles] = useState(
     Array.from({ length: 15 }, (_, i) => ({
       x: 50 + pseudoRandom(i + 1) * 700,
@@ -314,6 +325,44 @@ export default function PortfolioPage() {
     raf = window.requestAnimationFrame(update);
     return () => window.cancelAnimationFrame(raf);
   }, []);
+
+  useEffect(() => {
+    let raf = 0;
+    const updateNodes = () => {
+      setGraphNodes((prev) => {
+        const next = { ...prev };
+        (Object.keys(prev) as NodeName[]).forEach((node) => {
+          if (draggedNode === node) return;
+
+          const velocity = nodeVelocitiesRef.current[node];
+          const config = prev[node];
+          const floatRangeX = config.cluster === "backend" ? [14, 48] : config.cluster === "data" ? [46, 62] : config.cluster === "infra" ? [60, 80] : config.cluster === "ia" ? [42, 66] : [58, 82];
+          const floatRangeY = config.cluster === "ia" ? [12, 30] : [30, 76];
+
+          let x = config.x + velocity.vx;
+          let y = config.y + velocity.vy;
+          let vx = velocity.vx;
+          let vy = velocity.vy;
+
+          if (x <= floatRangeX[0] || x >= floatRangeX[1]) {
+            vx *= -1;
+            x = Math.min(Math.max(x, floatRangeX[0]), floatRangeX[1]);
+          }
+          if (y <= floatRangeY[0] || y >= floatRangeY[1]) {
+            vy *= -1;
+            y = Math.min(Math.max(y, floatRangeY[0]), floatRangeY[1]);
+          }
+
+          nodeVelocitiesRef.current[node] = { vx, vy };
+          next[node] = { ...config, x, y };
+        });
+        return next;
+      });
+      raf = window.requestAnimationFrame(updateNodes);
+    };
+    raf = window.requestAnimationFrame(updateNodes);
+    return () => window.cancelAnimationFrame(raf);
+  }, [draggedNode]);
 
   useEffect(() => {
     if (!draggedNode) return;
