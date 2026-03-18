@@ -396,7 +396,7 @@ export default function PortfolioPage() {
       </motion.nav>
 
       <section id="home" className="mx-auto grid min-h-screen max-w-6xl items-center gap-14 px-6 pb-24 pt-32 md:grid-cols-2">
-        <motion.div style={{ y: heroY }}>
+        <motion.div style={{ y: heroY }} className="relative z-10">
           <p className="mb-6 font-mono uppercase tracking-[0.3em] text-[#00ff88]/80">— Backend Engineer</p>
           {(["APIs.", "Automatisation.", "IA."] as const).map((word, i) => (
             <motion.h1
@@ -420,7 +420,7 @@ export default function PortfolioPage() {
           </div>
         </motion.div>
 
-        <motion.div style={{ y: heroY }} className="relative">
+        <motion.div style={{ y: heroY }} className="relative z-30">
           <div className="rounded-2xl border border-[#00ff88]/30 bg-[#0d0f18]/90 shadow-[0_0_30px_rgba(0,0,0,0.5)]">
             <div className="flex items-center justify-between border-b border-white/10 px-4 py-3 font-mono text-xs text-white/45">
               <div className="flex gap-2">
