@@ -12,6 +12,7 @@ import type { GraphNode, NodeName, NodeVelocity } from "./portfolio/types";
 
 export default function PortfolioPage() {
   const [blurNav, setBlurNav] = useState(false);
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
   const [lineCount, setLineCount] = useState(0);
 
@@ -33,6 +34,15 @@ export default function PortfolioPage() {
     const unsub = scrollY.on("change", (v) => setBlurNav(v > 18));
     return () => unsub();
   }, [scrollY]);
+
+  useEffect(() => {
+    if (!mobileNavOpen) return;
+    const onResize = () => {
+      if (window.innerWidth >= 768) setMobileNavOpen(false);
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [mobileNavOpen]);
 
   useEffect(() => {
     const onMove = (e: MouseEvent) => setMouse({ x: e.clientX, y: e.clientY });
@@ -231,7 +241,7 @@ export default function PortfolioPage() {
           blurNav ? "border-white/10 bg-[#080810]/60 backdrop-blur-md" : "bg-transparent"
         }`}
       >
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5 font-mono text-sm">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 font-mono text-sm sm:px-6 sm:py-5">
           <a href="#home" className="text-[#00ff88]">~/alex.dev</a>
           <div className="hidden items-center gap-8 md:flex">
             {[
@@ -246,10 +256,35 @@ export default function PortfolioPage() {
               </a>
             ))}
           </div>
-          <div className="flex items-center gap-2 text-[#00ff88]">
+          <button
+            type="button"
+            onClick={() => setMobileNavOpen((prev) => !prev)}
+            className="md:hidden"
+            aria-label="Ouvrir la navigation"
+            aria-expanded={mobileNavOpen}
+          >
+            <span className="font-mono text-xs uppercase tracking-[0.2em] text-white/75">menu</span>
+          </button>
+          <div className="hidden items-center gap-2 text-[#00ff88] sm:flex">
             <span className="h-2 w-2 animate-pulse rounded-full bg-[#00ff88]" /> disponible
           </div>
         </div>
+        {mobileNavOpen && (
+          <div className="border-t border-white/10 bg-[#080810]/95 px-4 py-4 md:hidden">
+            <div className="flex flex-col gap-4 font-mono text-xs uppercase tracking-[0.2em] text-white/80">
+              {[
+                ["Stack", "stack"],
+                ["IA", "ia"],
+                ["Parcours", "parcours"],
+                ["Contact", "contact"],
+              ].map(([label, id]) => (
+                <a key={id} href={`#${id}`} onClick={() => setMobileNavOpen(false)}>
+                  {label}
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
       </motion.nav>
 
       <HeroSection heroY={heroY} lineCount={lineCount} terminalLines={terminalLines} badges={badges} />
