@@ -8,6 +8,10 @@ html {
   scroll-behavior: smooth;
 }
 
+section[id] {
+  scroll-margin-top: 96px;
+}
+
 body {
   background: #080810;
   color: #fff;
@@ -47,6 +51,12 @@ body {
 }
 
 @media (max-width: 767px) {
+  body {
+    cursor: auto;
+  }
+}
+
+@media (max-width: 1023px) {
   body {
     cursor: auto;
   }

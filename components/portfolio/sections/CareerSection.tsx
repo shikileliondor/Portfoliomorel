@@ -4,7 +4,7 @@ import { careerData, ease } from "../data";
 
 export function CareerSection({ projectInView, sectionRef }: { projectInView: boolean; sectionRef: RefObject<HTMLDivElement | null> }) {
   return (
-    <section id="parcours" ref={sectionRef} className="mx-auto max-w-6xl px-6 py-24">
+    <section id="parcours" ref={sectionRef} className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-24">
       <motion.h2
         initial={{ opacity: 0, y: 28 }}
         animate={projectInView ? { opacity: 1, y: 0 } : {}}
@@ -13,17 +13,17 @@ export function CareerSection({ projectInView, sectionRef }: { projectInView: bo
       >
         {"// Parcours"}
       </motion.h2>
-      <div className="grid gap-6 md:grid-cols-3">
+      <div className="grid gap-4 sm:gap-6 md:grid-cols-3">
         {careerData.career.map((job, i) => (
           <motion.article
             key={job.company}
             initial={{ opacity: 0, y: 36 }}
             animate={projectInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.75, delay: i * 0.1, ease }}
-            className="rounded-2xl border border-white/10 bg-[#0f1020]/80 p-6 transition hover:-translate-y-1 hover:border-[#00ff88]/60"
+            className="rounded-2xl border border-white/10 bg-[#0f1020]/80 p-5 transition hover:-translate-y-1 hover:border-[#00ff88]/60 sm:p-6"
           >
             <p className="font-mono text-sm text-white/35">{job.period}</p>
-            <h3 className="mt-2 font-syne text-2xl">{job.company}</h3>
+            <h3 className="mt-2 font-syne text-xl sm:text-2xl">{job.company}</h3>
             <p className="font-mono text-sm text-[#00ff88]">{job.role}</p>
             <p className="mt-3 font-mono text-white/65">{job.shipped}</p>
             <p className="mt-3 border-l-2 border-[#00ff88]/35 pl-3 font-mono text-xs text-white/55">{job.war_story}</p>

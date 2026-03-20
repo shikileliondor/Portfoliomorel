@@ -36,7 +36,7 @@ export function StackSection({
   onNodePointerDown,
 }: Props) {
   return (
-    <section id="stack" ref={stackRef} className="mx-auto max-w-6xl px-6 py-24">
+    <section id="stack" ref={stackRef} className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-24">
       <motion.h2
         initial={{ opacity: 0, y: 28 }}
         animate={stackInView ? { opacity: 1, y: 0 } : {}}
@@ -46,8 +46,8 @@ export function StackSection({
         {"// Stack"}
       </motion.h2>
 
-      <div className="mb-10 rounded-2xl border border-white/10 bg-[#0f1020]/70 p-4 md:p-6">
-        <div ref={stackGraphRef} className="relative h-[440px] w-full overflow-hidden rounded-xl border border-white/10 bg-[#090b14]">
+      <div className="mb-10 rounded-2xl border border-white/10 bg-[#0f1020]/70 p-3 sm:p-4 md:p-6">
+        <div ref={stackGraphRef} className="relative h-[360px] w-full overflow-hidden rounded-xl border border-white/10 bg-[#090b14] sm:h-[420px] md:h-[440px]">
           <svg className="absolute inset-0 h-full w-full">
             {particles.map((particle, i) => (
               <circle key={`particle-${i}`} cx={particle.x} cy={particle.y} r="1" fill={particle.color} opacity="0.2" />
@@ -95,7 +95,7 @@ export function StackSection({
                 onPointerDown={(event) => onNodePointerDown(node, event)}
                 onMouseEnter={() => onNodeHover(node)}
                 onMouseLeave={() => onNodeHover(null)}
-                className="absolute -translate-x-1/2 -translate-y-1/2 rounded-[999px] border bg-[#09111a]/95 px-5 py-2.5 font-mono text-xs text-white transition duration-300"
+                className="absolute -translate-x-1/2 -translate-y-1/2 rounded-[999px] border bg-[#09111a]/95 px-3 py-2 text-[10px] text-white transition duration-300 sm:px-4 sm:py-2 sm:text-xs md:px-5 md:py-2.5"
                 style={{
                   left: `${config.x}%`,
                   top: `${config.y}%`,
@@ -115,7 +115,7 @@ export function StackSection({
 
           {hoveredNode && (
             <div
-              className="pointer-events-none absolute z-20 max-w-[260px] rounded-xl border border-white/20 bg-[#0b1020]/95 p-3"
+              className="pointer-events-none absolute z-20 hidden max-w-[260px] rounded-xl border border-white/20 bg-[#0b1020]/95 p-3 md:block"
               style={{
                 left: `${Math.min(graphNodes[hoveredNode].x + 3, 74)}%`,
                 top: `${Math.max(graphNodes[hoveredNode].y - 11, 8)}%`,
@@ -139,7 +139,7 @@ export function StackSection({
         </div>
       </div>
 
-      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
         {stackItems.map((item, i) => (
           <StackCard key={item.name} item={item} index={i} />
         ))}
