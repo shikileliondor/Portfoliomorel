@@ -11,12 +11,12 @@ export function ContactSection({ contactInView, sectionRef }: { contactInView: b
         transition={{ duration: 0.7, ease }}
         className="font-mono text-xl text-[#00ff88]"
       >
-        $ ping me@alex.dev
+        $ ping me@moreldev
       </motion.p>
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
         {[
-          { icon: "mail", label: "Email", value: "me@alex.dev", href: "mailto:me@alex.dev" },
-          { icon: "github", label: "GitHub", value: "github.com/alexdev", href: "https://github.com/alexdev" },
+          { icon: "mail", label: "Email", value: "me@moreldev", href: "mailto:morelyann10@gmail.com" },
+          { icon: "github", label: "GitHub", value: "github.com/moreldev", href: "https://github.com/shikileliondor" },
         ].map((item, i) => (
           <motion.a
             key={item.label}

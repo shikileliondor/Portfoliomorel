@@ -3,30 +3,85 @@ import type { CareerJob, ClusterName, GraphNode, IaCard, NodeName, StackItem } f
 export const ease: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
 export const stackItems: StackItem[] = [
-  { name: "Laravel", type: "Framework", level: 98, opinion: "Mon terrain de jeu principal. Élégant, rapide à shipper, batteries incluses" },
-  { name: "NestJS", type: "Framework", level: 91, opinion: "Quand on veut la structure de Laravel mais en TypeScript" },
-  { name: "PHP", type: "Langage", level: 95, opinion: "Mal aimé, sous-estimé. En prod depuis 2019 sans une plainte" },
-  { name: "TypeScript", type: "Langage", level: 94, opinion: "JavaScript avec une ceinture de sécurité. Je reviens plus en arrière" },
-  { name: "JavaScript", type: "Langage", level: 90, opinion: "Partout, tout le temps, pour le meilleur et pour le pire" },
-  { name: "Flutter", type: "Framework mobile", level: 88, opinion: "Un seul codebase, iOS et Android. La magie quand ça compile" },
+  { 
+    name: "Laravel", 
+    type: "Framework", 
+    level: 98, 
+    opinion: "Framework principal pour concevoir des architectures backend robustes, maintenables et orientées métier." 
+  },
+  { 
+    name: "NestJS", 
+    type: "Framework", 
+    level: 91, 
+    opinion: "Excellente base pour des applications scalables en TypeScript avec une architecture modulaire claire." 
+  },
+  { 
+    name: "PHP", 
+    type: "Langage", 
+    level: 95, 
+    opinion: "Langage mature et éprouvé, parfaitement adapté aux applications web critiques et aux environnements de production." 
+  },
+  { 
+    name: "TypeScript", 
+    type: "Langage", 
+    level: 94, 
+    opinion: "Apporte rigueur, typage fort et maintenabilité aux applications JavaScript complexes." 
+  },
+  { 
+    name: "JavaScript", 
+    type: "Langage", 
+    level: 90, 
+    opinion: "Fondation du développement web moderne, essentiel pour les interfaces dynamiques et interactives." 
+  },
+  { 
+    name: "Vue.js", 
+    type: "Framework frontend", 
+    level: 92, 
+    opinion: "Framework réactif et performant, idéal pour concevoir des interfaces utilisateurs fluides et modulaires." 
+  },
+  { 
+    name: "Flutter", 
+    type: "Framework mobile", 
+    level: 88, 
+    opinion: "Solution efficace pour le développement cross-platform avec une expérience utilisateur cohérente." 
+  },
   {
     name: "PostgreSQL",
     type: "Base de données",
     level: 93,
-    opinion: "La base de tout. JSON, full-text search, transactions — il fait tout",
+    opinion: "Système de gestion de base de données avancé, adapté aux applications complexes nécessitant performance et intégrité des données."
   },
-  { name: "MySQL", type: "Base de données", level: 90, opinion: "Le classique. Fiable, prévisible, pas de surprises" },
-  { name: "Docker", type: "Infra", level: 92, opinion: "Works on my machine — and yours. Fin du débat" },
+  { 
+    name: "MySQL", 
+    type: "Base de données", 
+    level: 90, 
+    opinion: "Solution fiable et largement adoptée pour des applications web nécessitant stabilité et simplicité." 
+  },
+  { 
+    name: "Docker", 
+    type: "Infrastructure", 
+    level: 92, 
+    opinion: "Standard de conteneurisation pour garantir la reproductibilité et la portabilité des environnements." 
+  },
   {
     name: "n8n",
     type: "Automatisation",
     level: 87,
-    opinion: "L'automatisation visuelle qui fait le travail de 3 scripts Python moches",
+    opinion: "Outil clé pour orchestrer des workflows métier complexes et automatiser les processus à forte valeur."
   },
-  { name: "Agents IA", type: "IA", level: 89, opinion: "RAG, LLMs, intégrations API — le nouveau backend invisible" },
-  { name: "Dart", type: "Langage", level: 82, opinion: "Propre et typé. On l'oublie vite tellement Flutter l'abstrait bien" },
+  { 
+    name: "Agents IA", 
+    type: "Intelligence Artificielle", 
+    level: 89, 
+    opinion: "Conception d’agents intelligents intégrés aux systèmes pour automatiser les décisions et les processus métiers." 
+  },
+  { 
+    name: "Dart", 
+    type: "Langage", 
+    level: 82, 
+    opinion: "Langage moderne optimisé pour les applications mobiles performantes via Flutter." 
+  },
 ];
-
 export const nodePositions: Record<NodeName, GraphNode> = {
   Laravel: { x: 44, y: 46, size: "lg", cluster: "backend" },
   NestJS: { x: 33, y: 34, size: "md", cluster: "backend" },
@@ -93,7 +148,7 @@ export const nodeInfo: Record<NodeName, { years: string; type: string; opinion: 
   PostgreSQL: { years: "6 ans", type: "Data", opinion: "Mon couteau suisse SQL pour les apps sérieuses." },
   MySQL: { years: "6 ans", type: "Data", opinion: "Fiable et rapide quand il faut aller droit au but." },
   Docker: { years: "5 ans", type: "Infra", opinion: "La base pour des environnements reproductibles sans friction." },
-  n8n: { years: "2 ans", type: "Automatisation", opinion: "Je remplace des tâches manuelles par des flux robustes." },
+  n8n: { years: "2 ans", type: "Automatjjisation", opinion: "Je remplace des tâches manuelles par des flux robustes." },
   "Agents IA": { years: "2 ans", type: "IA", opinion: "Le backend qui raisonne, décide et agit via API." },
   "API REST": { years: "6 ans", type: "Interface", opinion: "Le contrat clair entre mobile, web et backend." },
 };
@@ -102,58 +157,58 @@ export const iaCards: IaCard[] = [
   {
     title: "Agents IA",
     description:
-      "Construction d'agents autonomes avec LLMs (GPT-4, Claude). RAG sur bases documentaires, chaînes de traitement, intégrations API métier. Le backend qui pense.",
-    tags: ["LLM", "RAG", "LangChain", "API OpenAI", "Vector DB"],
+      "Construction d'agents autonomes pour l'automatisation d'un système ERP de gestion CRM : clients, signatures de devis, relances clients, etc.",
+    tags: ["LLM", "API DEEPSEEK", "Whatssap cloud", "Google tool"],
   },
   {
     title: "Automatisation n8n",
     description:
-      "Workflows visuels complexes connectant APIs, bases de données, webhooks et services tiers. Remplacement de scripts répétitifs, synchronisation de données, alerting intelligent.",
-    tags: ["n8n", "Webhooks", "ETL", "Zapier-killer", "Self-hosted"],
+      "Conception de workflows visuels complexes intégrant des APIs, des systèmes ERP et des chatbots pour automatiser les processus métiers.",
+    tags: ["n8n", "Webhooks", "API DEPPSEEK"],
   },
 ];
 
 export const careerData: { career: CareerJob[] } = {
   career: [
     {
-      company: "AgenceDigital CI",
-      role: "Lead Backend Developer",
-      period: "2023 → aujourd'hui",
-      stack: ["Laravel", "NestJS", "PostgreSQL", "Docker", "n8n"],
-      shipped: "Plateforme SaaS multi-tenant avec automatisation complète des workflows métier via n8n",
-      war_story:
-        "Le client voulait que 47 tâches manuelles soient automatisées en 2 semaines. J'ai tout câblé en n8n + Laravel. Livré en 11 jours. Les 3 derniers jours j'ai pas vu la lumière du soleil.",
+     company: "DYM Manufacture",
+      role: "Développeur Fullstack",
+     period: "2025 → aujourd'hui",
+      stack: ["Laravel", "PHP", "JavaScript", "Vue.js", "MySQL"],
+      shipped: "Conception et développement d’ERP pour digitaliser les opérations internes (gestion clients, facturation, suivi des activités).",
+    war_story:
+      " Déployements de modules ERP critiques en combinant Laravel pour une architecture backend robuste. Ces solutions ont permis d’automatiser les processus métiers, d’améliorer la productivité et de structurer les données de l’entreprise."
     },
-    {
-      company: "FintechWest Africa",
-      role: "Backend Engineer",
-      period: "2021 → 2023",
-      stack: ["Laravel", "PHP", "MySQL", "PostgreSQL", "Docker"],
-      shipped: "API de transfert d'argent mobile gérant 500K transactions/mois",
-      war_story:
-        "Race condition sur les transactions en prod un samedi matin. De l'argent se créait littéralement de nulle part. ROLLBACK, hotfix, redeploy en 23 minutes. Le plus beau sprint de ma vie.",
-    },
-    {
-      company: "StartupMobile",
-      role: "Fullstack Developer",
-      period: "2019 → 2021",
-      stack: ["Flutter", "Dart", "Laravel", "MySQL"],
-      shipped: "App mobile Flutter + backend Laravel livrés en même temps pour 3000 utilisateurs J1",
-      war_story:
-        "Premier projet Flutter. L'app crashait sur Android 8 seulement. Impossible à reproduire en local. Debuggé à l'aveugle avec des logs pendant 2 jours. C'était un plugin de caméra vieux de 4 ans.",
-    },
+    // {
+    //   company: "FintechWest Africa",
+    //   role: "Backend Engineer",
+    //   period: "2021 → 2023",
+    //   stack: ["Laravel", "PHP", "MySQL", "PostgreSQL", "Docker"],
+    //   shipped: "API de transfert d'argent mobile gérant 500K transactions/mois",
+    //   war_story:
+    //     "Race condition sur les transactions en prod un samedi matin. De l'argent se créait littéralement de nulle part. ROLLBACK, hotfix, redeploy en 23 minutes. Le plus beau sprint de ma vie.",
+    // },
+    // {
+    //   company: "StartupMobile",
+    //   role: "Fullstack Developer",
+    //   period: "2019 → 2021",
+    //   stack: ["Flutter", "Dart", "Laravel", "MySQL"],
+    //   shipped: "App mobile Flutter + backend Laravel livrés en même temps pour 3000 utilisateurs J1",
+    //   war_story:
+    //     "Premier projet Flutter. L'app crashait sur Android 8 seulement. Impossible à reproduire en local. Debuggé à l'aveugle avec des logs pendant 2 jours. C'était un plugin de caméra vieux de 4 ans.",
+    // },
   ],
 };
 
 export const terminalLines = [
-  'name: "Alex Morel"',
-  'role: "Backend Developer"',
+  'name: "Brou Effobi Morel Yann Aime"',
+  'role: "Backend Developer  Software Architect"',
   'stack: ["Laravel", "NestJS", "Flutter"]',
   'focus: "API • IA • Automatisation"',
-  'status: "open to work"',
+  // 'status: "open to wor"',
 ];
 
-export const badges = ["Laravel", "NestJS", "PostgreSQL", "Docker", "n8n", "Flutter"];
+ export const badges = ["Laravel", "NestJS", "PostgreSQL", "Docker", "n8n", "Flutter"];
 
 export const pseudoRandom = (seed: number) => {
   const x = Math.sin(seed * 999) * 10000;
